@@ -12,9 +12,12 @@ async function run() {
     const octokit = new github.GitHub(myToken)
     const { owner, repo } = github.context.repo
     const regexp = /^[.A-Za-z0-9_-]*$/
+    console.log(`head-ref:1 ${headRef}`)
+    console.log(`base-ref:2 ${baseRef}`)
 
     if (!headRef) {
       headRef = github.context.sha
+      console.log(`headRef: ${headRef}`)
     }
 
     if (!baseRef) {
@@ -30,16 +33,9 @@ async function run() {
         )
       }
     }
-    const tagName = await octokit.repos.getTag({
-      owner: owner,
-      repo: repo,
-      tag_sha: github.context.sha
-    })
 
     console.log(`head-ref: ${headRef}`)
     console.log(`base-ref: ${baseRef}`)
-    console.log(`tagName: ${tagName}`)
-    console.log(`ref: ${github.context.ref}`)
     // console.log('github.context.ref', github.context.ref)
     // console.log('github.context.ref', JSON.stringify(github.context))
 

@@ -79,6 +79,9 @@ async function getChangelog(headRef, baseRef, repoName) {
         '\x1b[32m%s\x1b[0m',
         `Changelog between ${baseRef} and ${headRef}:\n${output}`
       )
+      // var headRef = core.getInput('head-ref')
+      console.log('github.context.ref', github.context.ref)
+      console.log('github.context.ref', JSON.stringify(github.context))
       core.setOutput('changelog', output)
     } else {
       core.setFailed(err)
